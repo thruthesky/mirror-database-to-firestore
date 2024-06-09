@@ -12,7 +12,8 @@ export const mirrorDatabaseToFirestore = functions.database.ref(Config.fromPath)
   .onWrite(async (change: functions.Change<functions.database.DataSnapshot>, context: functions.EventContext<{
     [key: string]: string;
   }>) => {
-    console.log("Config properties; ", Config.fromPath, Config.toPath, Config.fields);
+    console.log('process.env; ', process.env);
+    console.log("Config properties; fromPath=>", Config.fromPath, 'toPath=>', Config.toPath, 'fields=>', Config.fields);
     dog("-- mirrorDatabaseToFirestore begins; change.before:", change.before.val(), "change.after:", change.after.val());
 
     const db = admin.firestore();

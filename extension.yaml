@@ -4,11 +4,11 @@
 # Identifier for your extension
 # TODO: Replace this with an descriptive name for your extension.
 name: fiex
-version: 0.0.1  # Follow semver versioning
+version: 0.0.3  # Follow semver versioning
 specVersion: v1beta  # Version of the Firebase Extensions specification
 
 # Friendly display name for your extension (~3-5 words)
-displayName: Greet the world
+displayName: Mirror Realtime Database to Firestore
 
 # Brief description of the task your extension performs (~1 sentence)
 description: >-
@@ -31,7 +31,10 @@ billingRequired: true
 
 # In a `roles` field, list any IAM access roles required for your extension to operate.
 # Learn more in the docs:
-# https://firebase.google.com/docs/extensions/reference/extension-yaml#roles-field
+# https://firebase.google.com/docs/extensions/reference/extension-yaml#rolroles:
+roles:
+  - role: datastore.owner
+    reason: Allows the extension to mirror data from the Realtime Database to the Firestore.
 
 # In the `resources` field, list each of your extension's functions, including the trigger for each function.
 # Learn more in the docs:
@@ -65,6 +68,12 @@ params:
     description: Where do you want to watch for changes?
     type: string
     default: path/to/{itemId}  # Specifying a default is optional.
+    required: true
+  - param: TO_PATH
+    label: Firestore Database path
+    description: Where do you want to mirror the data?
+    type: string
+    default: collection_name  # Specifying a default is optional.
     required: true
   - param: LOCATION
     label: Cloud Functions location

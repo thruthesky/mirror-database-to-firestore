@@ -89,6 +89,7 @@ export function dog(...args: unknown[]) {
  * see `convertData.spec.ts` for the test
  */
 export function convertData(data: any): any {
+    //
     if (data === null) {
         return null;
     } else if (Array.isArray(data)) {

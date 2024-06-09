@@ -85,6 +85,7 @@ exports.dog = dog;
  * see `convertData.spec.ts` for the test
  */
 function convertData(data) {
+    //
     if (data === null) {
         return null;
     }
