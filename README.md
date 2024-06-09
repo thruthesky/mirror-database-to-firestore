@@ -13,3 +13,4 @@
     - then the result will be `/posts/post1`, `posts/post2`. Plus, the mirrored data will have `category`, `uid`, `postid` fields inside the data.
 
 
+# mirror-database-to-firestore
