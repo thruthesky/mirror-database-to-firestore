@@ -6,8 +6,7 @@
   "etags": {
     "withcenter-test-2": {
       "extensionInstances": {
-        "greet-the-world": "95929e01625b1848b895286241a1384d54c581d0a8d37da77a620b1f11a2911a",
-        "fiex": "b141a39132bb27bdb4c77f2bcde1c7268b5d80c02837712bcbccf556dacb0af2"
+        "mirror-database-to-firestore": "68e6db74831f50875a2be0385e3633fccbb7d7b9b76cc32fb70a8aacb4301048"
       }
     }
   },

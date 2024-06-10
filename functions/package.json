@@ -3,16 +3,19 @@
   "scripts": {
     "lint": "eslint \"src/**/*\"",
     "lint:fix": "eslint \"src/**/*\" --fix",
+    "deploy": "npm run lint:fix && firebase deploy --only functions",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "mocha": "mocha '**/*.spec.ts'",
     "test": "(cd integration-tests && firebase emulators:exec 'npm run mocha' -P withcenter-test-2)",
-    "test:e2e-mirrorDatabaseToFirestore": "(cd integration-tests && firebase emulators:exec --log-verbosity DEBUG 'mocha --require ts-node/register e2e-mirrorDatabaseToFirestore.spec.ts --timeout 10000' -P withcenter-test-2)",
+    "test:e2e-mirrorDatabaseToFirestore": "(cd integration-tests && firebase emulators:exec 'dotenvx run -f extensions/mirror-database-to-firestore.env -- mocha --require ts-node/register e2e-mirrorDatabaseToFirestore.spec.ts --timeout 10000' -P withcenter-test-2)",
     "test:convertData": "mocha --require ts-node/register tests/convertData.spec.ts --watch --watch-files 'src/**/*.ts,tests/**/*.ts'",
-    "test:mirrorDatabaseToFirestore": "mocha --require ts-node/register tests/mirrorDatabaseToFirestore.spec.ts --watch --watch-files 'src/**/*.ts,tests/**/*.ts'"
+    "test:mirrorDatabaseToFirestore": "mocha --require ts-node/register tests/mirrorDatabaseToFirestore.spec.ts --watch --watch-files 'src/**/*.ts,tests/**/*.ts'",
+    "test:deep": "mocha --require ts-node/register tests/mirrorDatabaseToFirestore-deep.spec.ts --watch --watch-files 'src/**/*.ts,tests/**/*.ts'"
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@dotenvx/dotenvx": "^0.44.1",
     "firebase-admin": "^12.1.0",
     "firebase-functions": "^5.0.0"
   },

@@ -9,6 +9,6 @@
     "singleProjectMode": true
   },
   "extensions": {
-    "fiex": "../.."
+    "mirror-database-to-firestore": "../.."
   }
 }

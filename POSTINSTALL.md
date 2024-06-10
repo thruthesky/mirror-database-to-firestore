@@ -10,20 +10,34 @@ Learn more about writing a POSTINSTALL.md file in the docs:
 https://firebase.google.com/docs/extensions/publishers/user-documentation#writing-postinstall
 -->
 
-# See it in action
+# Mirror Database to Firestore
 
-You can test out this extension right away!
+The Realtime Database is excellent due to its simplicity and affordability. However, it doesn't quite match Firestore's capabilities in terms of data filtering and maintenance.
 
-Visit the following URL:
-${function:greetTheWorld.url}
+This extension facilitates the mirroring of data from the Realtime Database to Firestore. If you need to transfer/sync data from the Realtime Database to Firestore, this extension is the perfect tool for the job.
+
+# Installing the extension
+
+`FROM_PATH` is where the data resides and where it watches for CRUD.
+
+`TO_PATH` is where you want to mirror data to.
+
+
+
+
 
 # Using the extension
 
-When triggered by an HTTP request, this extension responds with the following specified greeting: "${param:GREETING} World from ${param:EXT_INSTANCE_ID}".
+After you complete the post-installation configuration above, the process runs as follows:
 
-To learn more about HTTP functions, visit the [functions documentation](https://firebase.google.com/docs/functions/http-events).
+Your extension creates subcollections in all the documents that your app uses as counters.
 
-<!-- We recommend keeping the following section to explain how to monitor extensions with Firebase -->
+The client sample writes to these subcollections to distribute the write load.
+
+The controllerCore function sums the subcollections' values into the single visits field (or whichever field you configured in your master document).
+
+After each summation, the extension deletes the subcollections, leaving only the count in the master document. This is the document field to which you should listen for the count.
+
 # Monitoring
 
 As a best practice, you can [monitor the activity](https://firebase.google.com/docs/extensions/manage-installed-extensions#monitor) of your installed extension, including checks on its health, usage, and logs.

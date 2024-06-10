@@ -79,24 +79,23 @@ exports.dog = dog;
 /**
  * Returns a map data that can be saved into Firestore
  *
- * @param {{[key:string]: any}} data data from realtime database
- * @returns {{[key:string]: any}}
+ * @param { object } data The data to be converted
+ * @return { object }
  *
  * see `convertData.spec.ts` for the test
  */
 function convertData(data) {
-    //
     if (data === null) {
-        return null;
+        return {};
     }
     else if (Array.isArray(data)) {
-        return { '_data': data };
+        return { "_data": data };
     }
-    else if (typeof data === 'object') {
+    else if (typeof data === "object") {
         return data;
     }
     else {
-        return { '_data': data };
+        return { "_data": data };
     }
 }
 exports.convertData = convertData;

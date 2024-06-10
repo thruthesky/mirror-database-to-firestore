@@ -148,4 +148,5 @@ describe('mirrorDatabaseToFirestore', () => {
         const data3 = snapshotGot3.data();
         expect(data3).to.be.undefined;
     });
+
 });

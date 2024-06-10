@@ -28,5 +28,7 @@
       "port": 9000
     }
   },
-  "extensions": {}
+  "extensions": {
+    "mirror-database-to-firestore": "."
+  }
 }

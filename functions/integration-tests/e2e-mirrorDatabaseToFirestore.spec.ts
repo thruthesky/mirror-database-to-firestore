@@ -25,9 +25,15 @@ describe("Mirror database to firestore", () => {
             test().makeChange(
                 makeDataSnapshot(null, path), // 실행 전 데이터 존재하지 않음
                 makeDataSnapshot('value-1', path), // 실행 후 데이터 존재
-            )
+            ),
+            {
+                eventId: 'temp-event-id',
+                timestamp: new Date().getTime().toString(),
+                auth: { uid: 'test-uid' },
+                authType: 'USER', // only for realtime database functions
+                params: { uid: 'uid1', postId: 'post1' },
+            }
         );
-
 
         //
         // 원격 실제 Firestore 에 값이 잘 복사되었는지 확인

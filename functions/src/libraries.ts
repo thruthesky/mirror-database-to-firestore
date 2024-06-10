@@ -10,7 +10,7 @@ import * as functions from "firebase-functions";
  * @return {boolean}
  */
 export function isCreate(change: functions.Change<functions.database.DataSnapshot>): boolean {
-    return !change.before.exists() && change.after.exists();
+  return !change.before.exists() && change.after.exists();
 }
 
 
@@ -21,7 +21,7 @@ export function isCreate(change: functions.Change<functions.database.DataSnapsho
  * @return {boolean}
  */
 export function isUpdate(change: functions.Change<functions.database.DataSnapshot>): boolean {
-    return change.before.exists() && change.after.exists();
+  return change.before.exists() && change.after.exists();
 }
 
 /**
@@ -31,7 +31,7 @@ export function isUpdate(change: functions.Change<functions.database.DataSnapsho
  * @return {boolean}
  */
 export function isDelete(change: functions.Change<functions.database.DataSnapshot>): boolean {
-    return change.before.exists() && !change.after.exists();
+  return change.before.exists() && !change.after.exists();
 }
 
 
@@ -48,11 +48,11 @@ export function isDelete(change: functions.Change<functions.database.DataSnapsho
  *
  */
 export function chunkArray<T>(myArray: T[], chunkSize: number): T[][] {
-    const results = [];
-    while (myArray.length) {
-        results.push(myArray.splice(0, chunkSize));
-    }
-    return results as T[][];
+  const results = [];
+  while (myArray.length) {
+    results.push(myArray.splice(0, chunkSize));
+  }
+  return results as T[][];
 }
 
 /**
@@ -62,11 +62,11 @@ export function chunkArray<T>(myArray: T[], chunkSize: number): T[][] {
  * it tries to retrieve it from the credential options. If it's not there either, it returns an empty string.
  */
 export function getProjectID(): string {
-    const app = admin.app();
-    // Return the project ID from the app options, or from the credential options if it's not set in the app options
-    // If it's not set in either, return an empty string
-    return app.options.projectId ||
-        (app.options.credential && (app.options.credential as unknown as { projectId: string }).projectId) || "";
+  const app = admin.app();
+  // Return the project ID from the app options, or from the credential options if it's not set in the app options
+  // If it's not set in either, return an empty string
+  return app.options.projectId ||
+    (app.options.credential && (app.options.credential as unknown as { projectId: string }).projectId) || "";
 }
 
 
@@ -76,28 +76,26 @@ export function getProjectID(): string {
  * @param {unknown[]} args arguments to be logged to the console
  */
 export function dog(...args: unknown[]) {
-    console.log("-- dog;", ...args);
+  console.log("-- dog;", ...args);
 }
 
 
 /**
  * Returns a map data that can be saved into Firestore
- * 
- * @param {{[key:string]: any}} data data from realtime database
- * @returns {{[key:string]: any}}
- * 
+ *
+ * @param { object } data The data to be converted
+ * @return { object }
+ *
  * see `convertData.spec.ts` for the test
  */
-export function convertData(data: any): any {
-    //
-    if (data === null) {
-        return null;
-    } else if (Array.isArray(data)) {
-        return { '_data': data };
-    } else if (typeof data === 'object') {
-        return data;
-    }
-    else {
-        return { '_data': data };
-    }
+export function convertData(data: { [key: string]: unknown }): { [key: string]: unknown } {
+  if (data === null) {
+    return {};
+  } else if (Array.isArray(data)) {
+    return {"_data": data};
+  } else if (typeof data === "object") {
+    return data;
+  } else {
+    return {"_data": data};
+  }
 }
