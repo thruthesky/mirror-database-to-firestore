@@ -11,7 +11,7 @@ if (admin.apps.length === 0) {
     admin.initializeApp();
 }
 exports.mirrorDatabaseToFirestore = config_1.Config.paths.map((path) => {
-    /// TODO - Convert it to Gen2
+    // / TODO - Convert it to Gen2
     return functions.database.ref(path.source)
         .onWrite(async (change, context) => {
         (0, libraries_1.dog)("Begin with params: ", context.params);
