@@ -79,12 +79,13 @@ exports.dog = dog;
 /**
  * Returns a map data that can be saved into Firestore
  *
+ * @param { ConfigPath } path The path to be converted
  * @param { object } data The data to be converted
  * @return { object }
  *
  * see `convertData.spec.ts` for the test
  */
-function convertData(data) {
+function convertData(path, data) {
     if (data === null) {
         return {};
     }
@@ -92,7 +93,18 @@ function convertData(data) {
         return { "_data": data };
     }
     else if (typeof data === "object") {
-        return data;
+        // If the fields are specified, only include those fields
+        if (path.fields) {
+            const result = {};
+            path.fields.forEach((field) => {
+                if (data[field])
+                    result[field] = data[field];
+            });
+            return result;
+        }
+        else {
+            return data;
+        }
     }
     else {
         return { "_data": data };

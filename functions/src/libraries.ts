@@ -1,5 +1,6 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
+import {ConfigPath} from "./config";
 // import { google } from "googleapis";
 
 
@@ -83,19 +84,30 @@ export function dog(...args: unknown[]) {
 /**
  * Returns a map data that can be saved into Firestore
  *
+ * @param { ConfigPath } path The path to be converted
  * @param { object } data The data to be converted
  * @return { object }
  *
  * see `convertData.spec.ts` for the test
  */
-export function convertData(data: { [key: string]: unknown }): { [key: string]: unknown } {
+export function convertData(path: ConfigPath, data: { [key: string]: unknown }): { [key: string]: unknown } {
   if (data === null) {
     return {};
   } else if (Array.isArray(data)) {
     return {"_data": data};
   } else if (typeof data === "object") {
-    return data;
+    // If the fields are specified, only include those fields
+    if (path.fields) {
+      const result = {} as { [key: string]: unknown };
+      path.fields.forEach((field) => {
+        if (data[field]) result[field] = data[field];
+      });
+      return result;
+    } else {
+      return data;
+    }
   } else {
     return {"_data": data};
   }
 }
+
