@@ -10,7 +10,7 @@ exports.Config = Config;
 /**
  * Region to deploy the function.
  */
-Config.region = "asia-southeast1";
+Config.region = "us-central1"; // asia-southeast1
 /**
    * Paths to mirror.
    */
