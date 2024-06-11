@@ -9,6 +9,8 @@ This cloud function mirrors data from realtime database to firestore database. I
 
 - Update `config.ts` for your need and deploy.
 
+- `region` is the region of the realtime database. It must be the same region of realtime database or it will produce error while deploying.
+
 - `Config.paths` is an array of `ConfigPath` type which has;
     - `source` - where the data come from and to watch the changes; It can be `a/{b}/{c}/{d}` to observe the path.
     - `destination` is where the data is written to
@@ -23,4 +25,9 @@ Example of path setting
       fields: ["title", "content", "author", "timestamp"],
     },
 ```
+
+- The parameters of the path will be saved into the document automatically.
+    - For instance, the path is `a/{b}/{c}`
+    - And if the value of the b is banana, and the value of the c is cherry,
+    - then the result will be `{ b: banana, c: cherry, ...and-other-values...}`
 

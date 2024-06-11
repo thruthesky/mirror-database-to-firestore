@@ -11,6 +11,10 @@ export interface ConfigPath {
  */
 export class Config {
   /**
+   * Region to deploy the function.
+   */
+  public static region = "asia-southeast1";
+  /**
      * Paths to mirror.
      */
   public static paths: Array<ConfigPath> = [
@@ -21,7 +25,7 @@ export class Config {
     {
       source: "posts/{category}/{postId}",
       destination: "posts",
-      fields: ["name", "timestamp"],
+      // fields: ["name", "timestamp"],
     },
     {
       source: "comments/{postId}/{commentId}",

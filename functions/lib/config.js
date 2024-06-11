@@ -8,6 +8,10 @@ class Config {
 }
 exports.Config = Config;
 /**
+ * Region to deploy the function.
+ */
+Config.region = "asia-southeast1";
+/**
    * Paths to mirror.
    */
 Config.paths = [
@@ -18,7 +22,7 @@ Config.paths = [
     {
         source: "posts/{category}/{postId}",
         destination: "posts",
-        fields: ["name", "timestamp"],
+        // fields: ["name", "timestamp"],
     },
     {
         source: "comments/{postId}/{commentId}",

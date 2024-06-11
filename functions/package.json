@@ -8,6 +8,7 @@
     "build:watch": "tsc --watch",
     "mocha": "mocha '**/*.spec.ts'",
     "test": "mocha --require ts-node/register tests/test.spec.ts --watch --watch-files 'src/**/*.ts,tests/**/*.ts'",
+    "test:1": "mocha --require ts-node/register tests/test-1.spec.ts --watch --watch-files 'src/**/*.ts,tests/**/*.ts'",
     "test:e2e-mirrorDatabaseToFirestore": "(cd integration-tests && firebase emulators:exec 'dotenvx run -f extensions/mirror-database-to-firestore.env -- mocha --require ts-node/register e2e-mirrorDatabaseToFirestore.spec.ts --timeout 10000' -P withcenter-test-2)",
     "test:convertData": "mocha --require ts-node/register tests/convertData.spec.ts --watch --watch-files 'src/**/*.ts,tests/**/*.ts'",
     "test:mirrorDatabaseToFirestore": "mocha --require ts-node/register tests/mirrorDatabaseToFirestore.spec.ts --watch --watch-files 'src/**/*.ts,tests/**/*.ts'",
