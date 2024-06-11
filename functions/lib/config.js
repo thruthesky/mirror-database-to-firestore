@@ -18,6 +18,7 @@ Config.paths = [
     {
         source: "posts/{category}/{postId}",
         destination: "posts",
+        fields: ["name", "timestamp"],
     },
     {
         source: "comments/{postId}/{commentId}",

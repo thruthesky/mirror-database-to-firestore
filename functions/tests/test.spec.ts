@@ -30,48 +30,50 @@ describe('mirrorDatabaseToFirestore', () => {
     it('Create, Update, Delete for function 0', async () => {
         const path: ConfigPath = Config.paths[0];
         const wrapped = test().wrap(mirrorDatabaseToFirestore[0]);
-        const id = 'id-0-' + (new Date).getTime();
+        const uid = 'id-0-' + (new Date).getTime();
         const value = 5;
 
         // Create data
         await wrapped(
-            test().makeChange(makeDataSnapshot(null, path.source), makeDataSnapshot(value, path.source.replace('{id}', id))),
             {
-                params: { id }
+                data: test().makeChange(makeDataSnapshot(null, path.source), makeDataSnapshot(value, path.source.replace('{uid}', uid))),
+                params: { uid }
             });
 
-        const snapshotGot = await admin.firestore().collection(path.destination).doc(id).get();
+        const snapshotGot = await admin.firestore().collection(path.destination).doc(uid).get();
         console.log(snapshotGot.data())
-        expect(snapshotGot.data()).to.deep.equal({ _data: value, id });
+        expect(snapshotGot.data()).to.deep.equal({ _data: value, uid });
 
         // Update data
         const value2 = 10;
         await wrapped(
-            test().makeChange(makeDataSnapshot(value, path.source.replace('{id}', id)), makeDataSnapshot(value2, path.source.replace('{id}', id))),
             {
-                params: { id }
+                data: test().makeChange(makeDataSnapshot(value, path.source.replace('{uid}', uid)), makeDataSnapshot(value2, path.source.replace('{uid}', uid))),
+
+                params: { uid }
             });
-        const snapshotGot2 = await admin.firestore().collection(path.destination).doc(id).get();
+        const snapshotGot2 = await admin.firestore().collection(path.destination).doc(uid).get();
         console.log(snapshotGot2.data())
-        expect(snapshotGot2.data()).to.deep.equal({ _data: value2, id });
+        expect(snapshotGot2.data()).to.deep.equal({ _data: value2, uid });
 
         // Delete data
         await wrapped(
-            test().makeChange(makeDataSnapshot(value2, path.source.replace('{id}', id)), makeDataSnapshot(null, path.source.replace('{id}', id)),),
             {
-                params: { id }
+                data: test().makeChange(makeDataSnapshot(value2, path.source.replace('{uid}', uid)), makeDataSnapshot(null, path.source.replace('{uid}', uid)),),
+
+                params: { uid }
             });
-        const snapshotGot3 = await admin.firestore().collection(path.destination).doc(id).get();
+        const snapshotGot3 = await admin.firestore().collection(path.destination).doc(uid).get();
         console.log(snapshotGot3.data())
         expect(snapshotGot3.data()).to.be.undefined;
     });
 
 
 
-    it('Create, Update, Delete for function 1 - source: depth-3/{a}/{id}', async () => {
+    it('Create, Update, Delete for function 1 - source: posts/{category}/{postId}', async () => {
         const path: ConfigPath = Config.paths[1];
         const wrapped = test().wrap(mirrorDatabaseToFirestore[1]);
-        const id = 'id-1-' + (new Date).getTime();
+        const postId = 'id-1-' + (new Date).getTime();
         const value = {
             name: 'name',
             timestamp: 123,
@@ -79,15 +81,15 @@ describe('mirrorDatabaseToFirestore', () => {
         } as any;
 
         // Create data
-        await wrapped(
-            test().makeChange(makeDataSnapshot(null, path.source), makeDataSnapshot(value, path.source.replace('{id}', id))),
-            {
-                params: { id }
-            });
+        await wrapped({
+            data: test().makeChange(makeDataSnapshot(null, path.source), makeDataSnapshot(value, path.source.replace('{postId}', postId))),
 
-        const snapshotGot = await admin.firestore().collection(path.destination).doc(id).get();
+            params: { postId }
+        });
+
+        const snapshotGot = await admin.firestore().collection(path.destination).doc(postId).get();
         console.log(snapshotGot.data())
-        expect(snapshotGot.data()).to.deep.equal({ ...{ name: 'name', timestamp: 123 }, id });
+        expect(snapshotGot.data()).to.deep.equal({ ...{ name: 'name', timestamp: 123 }, postId });
 
         // // Update data
         // const value2 = 10;
