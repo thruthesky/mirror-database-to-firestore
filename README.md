@@ -31,3 +31,13 @@ Example of path setting
     - And if the value of the b is banana, and the value of the c is cherry,
     - then the result will be `{ b: banana, c: cherry, ...and-other-values...}`
 
+
+
+
+- Run `npm run deploy` to deploy the functions
+
+
+## Backfill
+
+- To backfill, run `npm run backfill` and it will copy all the data from database to the firestore based on the Config settings.
+
