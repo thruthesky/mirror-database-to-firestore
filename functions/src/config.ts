@@ -11,7 +11,7 @@ export class Config {
   /**
    * Region to deploy the function.
    */
-  public static region = "asia-southeast1"; // asia-southeast1 | us-central1
+  public static region = "us-central1"; // asia-southeast1 | us-central1
   /**
    * Paths to mirror.
    */
