@@ -25,7 +25,8 @@ exports.mirrorDatabaseToFirestore = config_1.Config.paths.map((path) => {
         const ref = db.collection(path.destination).doc(change.after.key);
         // created or updated
         if ((0, libraries_1.isCreate)(change) || (0, libraries_1.isUpdate)(change)) {
-            const data = Object.assign(Object.assign({}, (0, libraries_1.convertData)(path, change.after.val())), params);
+            // `collection` is added by 2024. 06. 13. It is actually the detination of the config and it is usually the name of the collection in the firestore. (add this to document)
+            const data = Object.assign(Object.assign(Object.assign({}, (0, libraries_1.convertData)(path, change.after.val())), params), { collection: path.destination });
             (0, libraries_1.dog)("Data to write at path: ", ref.path, ", data: ", data);
             await ref.set(data);
         }
