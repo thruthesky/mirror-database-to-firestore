@@ -16,6 +16,10 @@ Config.region = "us-central1"; // asia-southeast1
    */
 Config.paths = [
     {
+        source: "admins/{uid}",
+        destination: "admins",
+    },
+    {
         source: "users/{uid}",
         destination: "users",
     },

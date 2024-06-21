@@ -19,6 +19,10 @@ export class Config {
      */
   public static paths: Array<ConfigPath> = [
     {
+      source: "admins/{uid}",
+      destination: "admins",
+    },
+    {
       source: "users/{uid}",
       destination: "users",
     },

@@ -3,7 +3,7 @@
   "scripts": {
     "lint": "eslint \"src/**/*\"",
     "lint:fix": "eslint \"src/**/*\" --fix",
-    "deploy": "npm run lint:fix && firebase deploy --only functions",
+    "deploy": "npm run lint:fix && firebase deploy --only functions:mirrorDatabaseToFirestore-0,functions:mirrorDatabaseToFirestore-1,functions:mirrorDatabaseToFirestore-2,functions:mirrorDatabaseToFirestore-3",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "mocha": "mocha '**/*.spec.ts'",

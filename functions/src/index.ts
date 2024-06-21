@@ -1,10 +1,10 @@
 
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
-import { DataSnapshot, DatabaseEvent, onValueWritten } from "firebase-functions/v2/database";
+import {DataSnapshot, DatabaseEvent, onValueWritten} from "firebase-functions/v2/database";
 
-import { Config } from "./config";
-import { convertData, dog, isCreate, isDelete, isUpdate } from "./libraries";
+import {Config} from "./config";
+import {convertData, dog, isCreate, isDelete, isUpdate} from "./libraries";
 // import { Config } from "./config";
 // import { convertData, dog, isCreate, isDelete, isUpdate } from "./libraries";
 
@@ -35,7 +35,7 @@ export const mirrorDatabaseToFirestore =
         // created or updated
         if (isCreate(change) || isUpdate(change)) {
           // `collection` is added by 2024. 06. 13. It is actually the detination of the config and it is usually the name of the collection in the firestore. (add this to document)
-          const data = { ...convertData(path, change.after.val()), ...params, ...{ collection: path.destination } };
+          const data = {...convertData(path, change.after.val()), ...params, ...{collection: path.destination}};
           dog("Data to write at path: ", ref.path, ", data: ", data);
           await ref.set(data);
         } else if (isDelete(change)) {
