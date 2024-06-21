@@ -7,7 +7,7 @@ This cloud function mirrors data from realtime database to firestore database. I
 ## Install
 
 
-- Update `config.ts` for your need and deploy.
+- Update `src/config.ts` for your need and deploy.
 
 - `region` is the region of the realtime database. It must be the same region of realtime database or it will produce error while deploying.
 
